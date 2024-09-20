@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'https://*.vercel.app']
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000', 'https://cowork-connect-frontend.vercel.app']
 
 
 AUTH_USER_MODEL = "coworkingspace.User"

@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from cowork.storage import SupabaseStorage
 
 class User(AbstractUser):
     organization = models.CharField(max_length=50, blank=True, null=True)
@@ -27,7 +28,7 @@ class Description(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     website_url = models.URLField(blank=True, null=True)
-    image = models.ImageField(upload_to='workspace_images/', blank=True, null=True)
+    image = models.ImageField(storage=SupabaseStorage(), upload_to='workspace_images/', blank=True, null=True)
 
     def __str__(self):
         return self.name

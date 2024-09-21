@@ -149,7 +149,7 @@ USE_TZ = True
 
 STORAGES = {
     "default": {
-        "BACKEND": "storages.backends.s3.S3Storage", 
+        "BACKEND": "cowork.storage.SupabaseStorage", 
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
@@ -161,8 +161,10 @@ AWS_STORAGE_BUCKET_NAME=os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_ACCESS_KEY_ID=os.environ.get('AWS_S3_ACCESS_KEY_ID')
 AWS_S3_SECRET_ACCESS_KEY=os.environ.get('AWS_S3_SECRET_ACCESS_KEY')
 AWS_S3_REGION_NAME=os.environ.get('AWS_S3_REGION_NAME')
-AWS_DEFAULT_ACL=None
+AWS_DEFAULT_ACL='public-read'
 AWS_S3_ENDPOINT_URL=os.environ.get('AWS_S3_ENDPOINT_URL')
+SUPABASE_KEY=os.environ.get('SUPABASE_KEY')
+SUPABASE_URL=os.environ.get('SUPABASE_URL')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 

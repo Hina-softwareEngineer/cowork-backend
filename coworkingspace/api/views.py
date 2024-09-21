@@ -130,3 +130,18 @@ class SearchByLocation(generics.ListAPIView):
             queryset = queryset.filter(location__area__icontains=area)
         
         return queryset
+
+
+class GetKeys(generics.ListAPIView):
+    
+    queryset =  WorkspaceForm.objects.all()
+    serializer_class = WorkspaceFormSerializer
+
+    def get(self, request, *args, **kwargs):
+        print(settings.AWS_STORAGE_BUCKET_NAME,
+settings.AWS_S3_ACCESS_KEY_ID,
+settings.AWS_S3_SECRET_ACCESS_KEY,
+settings.AWS_S3_REGION_NAME,
+settings.AWS_DEFAULT_ACL,
+settings.AWS_S3_ENDPOINT_URL)
+        return self.list(request, *args, **kwargs)

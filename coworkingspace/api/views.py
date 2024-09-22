@@ -117,7 +117,7 @@ class SearchByLocation(generics.ListAPIView):
     serializer_class = WorkspaceFormSerializer
 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset().filter(publish=True)
         country = self.request.GET.get('country')
         city = self.request.GET.get('city')
         area = self.request.GET.get('area')

@@ -60,6 +60,7 @@ class WorkspaceForm(models.Model):
     location = models.OneToOneField(Location, on_delete=models.CASCADE) 
     operational_timings = models.OneToOneField(OperationalTimings, on_delete=models.CASCADE)
     capacity = models.OneToOneField(Capacity, on_delete=models.CASCADE)
+    publish = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Workspace Form by {self.user.username}"

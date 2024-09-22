@@ -136,12 +136,12 @@ class AddWorkspaceFormSerializer(serializers.Serializer):
     operational_timings = OperationalTimingsSerializer()
     capacity = CapacitySerializer()
 
-    amenities = AmenitySerializer(many=True)
-    meeting_rooms = MeetingRoomSerializer(many=True)
-    price_desks = DeskSerializer(many=True)
-    price_private_offices = PrivateOfficeSerializer(many=True)
-    price_floors = FloorDataSerializer(many=True)
-    mentorship = MentorshipSerializer(many=True)
+    amenities = AmenitySerializer(many=True, required=False)
+    meeting_rooms = MeetingRoomSerializer(many=True, required=False)
+    price_desks = DeskSerializer(many=True, required=False)
+    price_private_offices = PrivateOfficeSerializer(many=True, required=False)
+    price_floors = FloorDataSerializer(many=True, required=False)
+    mentorship = MentorshipSerializer(many=True, required=False)
 
     class Meta:
         model  =  WorkspaceForm
@@ -158,12 +158,12 @@ class AddWorkspaceFormSerializer(serializers.Serializer):
         location_data = validated_data.pop('location')
         operational_timings_data = validated_data.pop('operational_timings')
         capacity_data = validated_data.pop('capacity')
-        amenities_data = validated_data.pop('amenities')
-        meeting_rooms_data = validated_data.pop('meeting_rooms')
-        price_desks_data = validated_data.pop('price_desks')
-        price_private_offices_data = validated_data.pop('price_private_offices')
-        price_floors_data = validated_data.pop('price_floors')
-        mentorship_data = validated_data.pop('mentorship')
+        amenities_data = validated_data.pop('amenities', [])
+        meeting_rooms_data = validated_data.pop('meeting_rooms', [])
+        price_desks_data = validated_data.pop('price_desks', [])
+        price_private_offices_data = validated_data.pop('price_private_offices', [])
+        price_floors_data = validated_data.pop('price_floors', [])
+        mentorship_data = validated_data.pop('mentorship', [])
 
         description = Description.objects.create(**description_data)
         location = Location.objects.create(**location_data)

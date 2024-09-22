@@ -40,7 +40,7 @@ class CapacityAdmin(admin.ModelAdmin):
 # Register WorkspaceForm model
 @admin.register(WorkspaceForm)
 class WorkspaceFormAdmin(admin.ModelAdmin):
-    list_display = ('user', 'description', 'location', 'operational_timings', 'capacity', 'publish')
+    list_display = ('id', 'user', 'description', 'location', 'operational_timings', 'capacity', 'publish',  'category')
 
 # Register Amenity model
 @admin.register(Amenity)

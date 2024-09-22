@@ -55,15 +55,20 @@ class Capacity(models.Model):
 
 # Main form data model
 class WorkspaceForm(models.Model):
+    WORKSPACE_CHOICES = [
+        ('coworking-space', 'Coworking Space'),
+        ('corporate', 'Corporate'),
+    ]
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     description = models.OneToOneField(Description, on_delete=models.CASCADE)
     location = models.OneToOneField(Location, on_delete=models.CASCADE) 
     operational_timings = models.OneToOneField(OperationalTimings, on_delete=models.CASCADE)
     capacity = models.OneToOneField(Capacity, on_delete=models.CASCADE)
     publish = models.BooleanField(default=False)
+    category = models.CharField(max_length=100, choices=WORKSPACE_CHOICES, default='corporate')
 
     def __str__(self):
-        return f"Workspace Form by {self.user.username}"
+        return f"{self.id} - Workspace by {self.user.username}"
     
 
 class Amenity(models.Model):

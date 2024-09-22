@@ -103,7 +103,8 @@ class WorkspaceFormSerializer(serializers.ModelSerializer):
             'price_desks',
             'price_private_offices',
             'price_floors',
-            'mentorship',]
+            'mentorship', 'category']
+        read_only_fields  = ("category", )
         
     def get_amenities(self, obj):
         amenities = Amenity.objects.filter(workspace_id=obj.pk)
@@ -178,7 +179,7 @@ class AddWorkspaceFormSerializer(serializers.Serializer):
             user=user
         )
         
-
+        print("--------done here---------")
         # Create amenities
         for amenity_data in amenities_data:
             Amenity.objects.create(workspace_id=workspace_form, **amenity_data)

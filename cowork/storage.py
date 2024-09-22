@@ -1,7 +1,7 @@
 
 import os
 import  mimetypes
-import tempfile
+import datetime
 from supabase import create_client
 from django.conf import settings
 from storages.utils import clean_name, ReadBytesWrapper, is_seekable
@@ -30,7 +30,12 @@ class SupabaseStorage(S3StaticStorage):
         return  name
     
     def _save(self, name, content):
-        cleaned_name = clean_name(name)
+        cleaned_name = clean_name(name) 
+        current_time = datetime.datetime.now().isoformat()
+        splitted_filename = cleaned_name.split(".")
+        n = len(splitted_filename)
+        cleaned_name  = "".join([splitted_filename[i] for i in range(n - 1)])
+        cleaned_name = cleaned_name + current_time +  splitted_filename[n - 1]
         name = self._normalize_name(cleaned_name)
         params = self._get_write_parameters(name, content)
 
@@ -39,7 +44,7 @@ class SupabaseStorage(S3StaticStorage):
 
         file_data = content.read()
         
-        result = self.supabase.storage.from_(settings.AWS_STORAGE_BUCKET_NAME).upload(file=file_data,path=name, file_options=params)
+        result = self.supabase.storage.from_(settings.AWS_STORAGE_BUCKET_NAME).upload(file=file_data,path=cleaned_name, file_options=params)
         # if result.get('error'):
         #     raise Exception(f"Upload failed: {result['error']['message']}")
 
